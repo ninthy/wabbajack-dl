@@ -11,4 +11,6 @@ dependencies = [
     "opencv-python>=4.8.0",
     "numpy>=1.24.0",
     "pyscreenshot>=3.1",
+    "pypiwin32>=223",
+    "pyinstaller>=6.17.0",
 ]

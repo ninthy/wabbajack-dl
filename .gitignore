@@ -10,3 +10,7 @@ wheels/
 # Virtual environments
 .venv
 uv.lock
+main.spec
+build
+dist
+main.exe
