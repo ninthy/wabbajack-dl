@@ -129,8 +129,8 @@ def main():
     scroll_count = 0
     scroll_threshold = 20
     total_mods = IntPrompt.ask("How many mods do you want to install?")
-    current_index = IntPrompt.ask("How many mods are already downloaded (if the current page says 100, enter 99)?", default=0)
-
+    already_downloaded = IntPrompt.ask("How many mods are already downloaded (if the current page says 100, enter 99)?", default=0)
+    current = 0
 
     start_time = time.time() 
     with Progress(
@@ -141,7 +141,7 @@ def main():
         TimeElapsedColumn(),
         TimeRemainingColumn(),
     ) as progress:
-        task = progress.add_task("[cyan]Installing mods...", total=total_mods, completed=current_index)
+        task = progress.add_task("[cyan]Installing mods...", total=total_mods, completed=already_downloaded)
         
         while not progress.finished:
             if scroll_count > scroll_threshold:
@@ -162,8 +162,9 @@ def main():
             progress.advance(task)
             scroll_count = 0
             time.sleep(5)
+            current += 1
 
-    if scroll_count < scroll_threshold:
+    if scroll_count < scroll_threshold or (already_downloaded + current) >= total_mods - 1:
         print(f"You saved [yellow]{timedelta(seconds=int(time.time() - start_time))}[/yellow] of manual labor!")
     else:
         print(f"[red]Failed to find [bold]{image_path}[/bold] after multiple scrolls, exiting")
