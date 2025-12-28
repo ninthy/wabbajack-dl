@@ -6,7 +6,7 @@ dist/
 wheels/
 *.egg-info
 .vscode
-.gitignore
+
 # Virtual environments
 .venv
 uv.lock
